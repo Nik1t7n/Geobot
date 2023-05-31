@@ -96,7 +96,7 @@ def reload_bot(message):
     send_new_country_description(message)
 
 # Загрузка данных из JSON-файла
-country_descriptions = load_country_descriptions('descriptions.json')
+country_descriptions = load_country_descriptions(r'C:\Users\Nik1t7n\PycharmProjects\test\bot\descriptions.json')
 
 # Загрузка базы фотографий
 photo_data = load_photo_dict(photo_dict)
