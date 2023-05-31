@@ -24,14 +24,14 @@ photo_dict = {
     "https://imgur.com/a/bwFquZJ": "Си Эн Тауэр Торонто Канада",
     "https://imgur.com/a/axodcZk": "Пустыня Данакиль Эфиопия Африка",
     "https://imgur.com/a/u6PEBKN": "Аллея Баобабов Мадагаскар Африка",
-    "https://imgur.com/a/afMWgVL": "Каменный Лес Мадагаскар Цинги-Де-Бемараха",
+    "https://imgur.com/a/afMWgVL": "Каменный Лес Мадагаскар Цинги-де-Бемараха",
     "https://imgur.com/a/AZejamB": "Луксор Египет Африка",
     "https://imgur.com/a/SCTJy6t": "Гора Килиманджаро Танзания Африка",
     "https://imgur.com/a/tUYfN7Q": "Гора Столовая ЮАР Африка",
     "https://imgur.com/a/iVYL0M8": "Колыбель Человечества ЮАР Африка",
     "https://imgur.com/a/CgEhQrx": "Томбукту Мали Африка",
     "https://imgur.com/a/Es5EB4Y": "Водопад Виктория Замбия Африка",
-    "https://imgur.com/a/Upbjw0I": "Берег Скелетов Намибия Африка"
+    "https://imgur.com/a/Upbjw0I": "Берег Скелетов Намибия"
 }
 
 
@@ -41,6 +41,7 @@ photo_dict = {
 def load_country_descriptions(file_path):
     with open(file_path, 'r', encoding='utf-8') as json_file:
         country_dict = json.load(json_file)
+
     return country_dict
 
 # Загрузка данных из базы фотографий
@@ -48,6 +49,7 @@ def load_photo_dict(photo_dict):
     photo_data = {}
     for photo_url, answer in photo_dict.items():
         photo_data[photo_url] = answer
+
     return photo_data
 
 # Выбор случайного описания для страны
