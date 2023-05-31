@@ -2,44 +2,46 @@ import random
 import telebot
 import json
 
+password = "botisnotfree"
+
 photo_dict = {
-    "https://imgur.com/a/RLzta7G": "Гранд Каньон (Аризона, США)",
-    "https://imgur.com/a/6kZ7Tsn": "Каньон Антилопы (Аризона, США)",
-    "https://imgur.com/a/T1Y46a6": "Каньон Подкова (Аризона, США)",
-    "https://imgur.com/a/UkvelEJ": "Долина Монументов (Аризона, Юта - США)",
-    "https://imgur.com/a/qhBTKWw": "Брайс-Каньон (Юта, США)",
-    "https://imgur.com/a/o9N5Z8L": "Дыра Славы, озеро Берриесса, США",
-    "https://imgur.com/a/ujX1Sjm": "Ниагарский водопад (США, Канада)",
-    "https://imgur.com/a/CgWWx5f": "Великий призматический источник, Йеллоустонский национальный парк (США)",
-    "https://imgur.com/a/Zs3PBxF": "Гейзер Флай (Невада, США)",
-    "https://imgur.com/a/NOzyXnr": "Мост «Золотые ворота» (Сан-Франциско, США)",
-    "https://imgur.com/a/opZ1pHn": "Гора Рашмор: Мемориал президентам США",
-    "https://imgur.com/a/lqGP4jy": "Монумент Вашингтона (США)",
-    "https://imgur.com/a/X4yuuzJ": "Национальный парк Секвойя (США)",
-    "https://imgur.com/a/bLw5TfM": "Центральный парк, Нью-Йорк, США",
-    "https://imgur.com/a/6UdMMHb": "Пещеры ледника Менденхолла (Аляска, США)",
-    "https://imgur.com/a/t83AlmH": "Национальный парк Банф (Канада)",
-    "https://imgur.com/a/YXXO4vv": "Монреальский ботанический сад (Канада)",
-    "https://imgur.com/a/7R1RdM7": "Висячий мост Капилано (Ванкувер, Канада)",
-    "https://imgur.com/a/bwFquZJ": "Си Эн Тауэр (Торонто, Канада)",
-    "https://imgur.com/a/axodcZk": "Пустыня Данакиль (Эфиопия, Африка)",
-    "https://imgur.com/a/u6PEBKN": "Аллея баобабов (Мадагаскар, Африка)",
-    "https://imgur.com/a/afMWgVL": "Каменный лес, Мадагаскар Цинги-де-Бемараха",
-    "https://imgur.com/a/AZejamB": "Луксор (Египет, Африка)",
-    "https://imgur.com/a/SCTJy6t": "Гора Килиманджаро (Танзания, Африка)",
-    "https://imgur.com/a/tUYfN7Q": "Гора Столовая (ЮАР, Африка)",
-    "https://imgur.com/a/iVYL0M8": "Колыбель человечества (ЮАР, Африка)",
-    "https://imgur.com/a/CgEhQrx": "Томбукту (Мали, Африка)",
-    "https://imgur.com/a/Es5EB4Y": "Водопад Виктория (Замбия, Африка)",
-    "https://imgur.com/a/Upbjw0I": "Берег Скелетов, Намибия"
+    "https://imgur.com/a/RLzta7G": "Гранд Каньон Аризона США",
+    "https://imgur.com/a/6kZ7Tsn": "Каньон Антилопы Аризона США",
+    "https://imgur.com/a/T1Y46a6": "Каньон Подкова Аризона США",
+    "https://imgur.com/a/UkvelEJ": "Долина Монументов Аризона Юта США",
+    "https://imgur.com/a/qhBTKWw": "Брайс-Каньон Юта США",
+    "https://imgur.com/a/o9N5Z8L": "Дыра Славы Озеро Берриесса США",
+    "https://imgur.com/a/ujX1Sjm": "Ниагарский Водопад США Канада",
+    "https://imgur.com/a/CgWWx5f": "Великий Призматический Источник Йеллоустонский Национальный Парк США",
+    "https://imgur.com/a/Zs3PBxF": "Гейзер Флай Невада США",
+    "https://imgur.com/a/NOzyXnr": "Мост Золотые Ворота Сан-Франциско США",
+    "https://imgur.com/a/opZ1pHn": "Гора Рашмор Мемориал Президентам США",
+    "https://imgur.com/a/lqGP4jy": "Монумент Вашингтона США",
+    "https://imgur.com/a/X4yuuzJ": "Национальный Парк Секвойя США",
+    "https://imgur.com/a/bLw5TfM": "Центральный Парк Нью-Йорк США",
+    "https://imgur.com/a/6UdMMHb": "Пещеры Ледника Менденхолла Аляска США",
+    "https://imgur.com/a/t83AlmH": "Национальный Парк Банф Канада",
+    "https://imgur.com/a/YXXO4vv": "Монреальский Ботанический Сад Канада",
+    "https://imgur.com/a/7R1RdM7": "Висячий Мост Капилано Ванкувер Канада",
+    "https://imgur.com/a/bwFquZJ": "Си Эн Тауэр Торонто Канада",
+    "https://imgur.com/a/axodcZk": "Пустыня Данакиль Эфиопия Африка",
+    "https://imgur.com/a/u6PEBKN": "Аллея Баобабов Мадагаскар Африка",
+    "https://imgur.com/a/afMWgVL": "Каменный Лес Мадагаскар Цинги-Де-Бемараха",
+    "https://imgur.com/a/AZejamB": "Луксор Египет Африка",
+    "https://imgur.com/a/SCTJy6t": "Гора Килиманджаро Танзания Африка",
+    "https://imgur.com/a/tUYfN7Q": "Гора Столовая ЮАР Африка",
+    "https://imgur.com/a/iVYL0M8": "Колыбель Человечества ЮАР Африка",
+    "https://imgur.com/a/CgEhQrx": "Томбукту Мали Африка",
+    "https://imgur.com/a/Es5EB4Y": "Водопад Виктория Замбия Африка",
+    "https://imgur.com/a/Upbjw0I": "Берег Скелетов Намибия Африка"
 }
+
 
 
 # Загрузка данных из JSON-файла
 def load_country_descriptions(file_path):
     with open(file_path, 'r', encoding='utf-8') as json_file:
         country_dict = json.load(json_file)
-
     return country_dict
 
 # Загрузка данных из базы фотографий
@@ -47,7 +49,6 @@ def load_photo_dict(photo_dict):
     photo_data = {}
     for photo_url, answer in photo_dict.items():
         photo_data[photo_url] = answer
-
     return photo_data
 
 # Выбор случайного описания для страны
@@ -106,22 +107,37 @@ bot = telebot.TeleBot('6116570275:AAEdNShJXJxaEVENGlollLzhMaNZf5fttfg')
 user_data = {}
 
 # Обработчик команды /start
+password_entered = False
+
 @bot.message_handler(commands=['start'])
 def handle_start(message):
-    bot.send_message(message.chat.id, "Здравствуйте, введите команду /places, чтобы перейти к достопримечательностям, или /countries, чтобы отгадывать страны по описанию.", parse_mode='HTML')
+    global password_entered
+    if message.text == "/start":
+        bot.send_message(message.chat.id, "Введите пароль по структуре (<i>/start пароль</i>):", parse_mode='HTML')
+    elif message.text == f"/start {password}":
+        password_entered = True
+        bot.send_message(message.chat.id, "Здравствуйте, введите команду /places, чтобы перейти к достопримечательностям, или /countries, чтобы отгадывать страны по описанию.", parse_mode='HTML')
+    else:
+        bot.send_message(message.chat.id, "Неправильный пароль. Попробуйте ещё раз.")
+
+
 
 # Обработчик команды /countries
 @bot.message_handler(commands=['countries'])
 def handle_countries(message):
-    send_new_country_description(message)
+    if password_entered:
+        send_new_country_description(message)
+    else:
+        bot.send_message(message.chat.id, "Жулик не воруй — <b>пароль не введен!</b> <i>Нажмите /start и больше так не делайте!</i>", parse_mode='HTML')
 
 # Обработчик команды /places
 @bot.message_handler(commands=['places'])
 def handle_places(message):
-    send_new_photo(message)
+    if password_entered:
+        send_new_photo(message)
+    else:
+        bot.send_message(message.chat.id, "Жулик не воруй — <b>пароль не введен!</b> <i>Нажмите /start и больше так не делайте!</i>", parse_mode='HTML')
 
-# Обработчик ответов пользователя
-# Обработчик ответов пользователя
 # Обработчик ответов пользователя
 @bot.message_handler(func=lambda message: True)
 def handle_user_answer(message):
