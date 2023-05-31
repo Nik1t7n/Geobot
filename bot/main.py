@@ -2,8 +2,6 @@ import random
 import telebot
 import json
 
-password = "botisnotfree"
-
 photo_dict = {
     "https://imgur.com/a/RLzta7G": "Гранд Каньон Аризона США",
     "https://imgur.com/a/6kZ7Tsn": "Каньон Антилопы Аризона США",
@@ -35,6 +33,7 @@ photo_dict = {
     "https://imgur.com/a/Es5EB4Y": "Водопад Виктория Замбия Африка",
     "https://imgur.com/a/Upbjw0I": "Берег Скелетов Намибия Африка"
 }
+
 
 
 
@@ -95,7 +94,7 @@ def reload_bot(message):
     send_new_country_description(message)
 
 # Загрузка данных из JSON-файла
-country_descriptions = load_country_descriptions('C:\\Users\\Nik1t7n\\PycharmProjects\\test\\bot\\descriptions.json')
+country_descriptions = load_country_descriptions('descriptions.json')
 
 # Загрузка базы фотографий
 photo_data = load_photo_dict(photo_dict)
@@ -107,37 +106,22 @@ bot = telebot.TeleBot('6116570275:AAEdNShJXJxaEVENGlollLzhMaNZf5fttfg')
 user_data = {}
 
 # Обработчик команды /start
-password_entered = False
-
 @bot.message_handler(commands=['start'])
 def handle_start(message):
-    global password_entered
-    if message.text == "/start":
-        bot.send_message(message.chat.id, "Введите пароль по структуре (<i>/start пароль</i>):", parse_mode='HTML')
-    elif message.text == f"/start {password}":
-        password_entered = True
-        bot.send_message(message.chat.id, "Здравствуйте, введите команду /places, чтобы перейти к достопримечательностям, или /countries, чтобы отгадывать страны по описанию.", parse_mode='HTML')
-    else:
-        bot.send_message(message.chat.id, "Неправильный пароль. Попробуйте ещё раз.")
-
-
+    bot.send_message(message.chat.id, "Здравствуйте, введите команду /places, чтобы перейти к достопримечательностям, или /countries, чтобы отгадывать страны по описанию.", parse_mode='HTML')
 
 # Обработчик команды /countries
 @bot.message_handler(commands=['countries'])
 def handle_countries(message):
-    if password_entered:
-        send_new_country_description(message)
-    else:
-        bot.send_message(message.chat.id, "Жулик не воруй — <b>пароль не введен!</b> <i>Нажмите /start и больше так не делайте!</i>", parse_mode='HTML')
+    send_new_country_description(message)
 
 # Обработчик команды /places
 @bot.message_handler(commands=['places'])
 def handle_places(message):
-    if password_entered:
-        send_new_photo(message)
-    else:
-        bot.send_message(message.chat.id, "Жулик не воруй — <b>пароль не введен!</b> <i>Нажмите /start и больше так не делайте!</i>", parse_mode='HTML')
+    send_new_photo(message)
 
+# Обработчик ответов пользователя
+# Обработчик ответов пользователя
 # Обработчик ответов пользователя
 @bot.message_handler(func=lambda message: True)
 def handle_user_answer(message):
